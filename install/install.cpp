@@ -730,9 +730,8 @@ bool verify_package(Package* package, RecoveryUI* ui) {
   std::chrono::duration<double> duration = std::chrono::system_clock::now() - t0;
   ui->Print("Update package verification took %.1f s (result %d).\n", duration.count(), err);
   if (err != VERIFY_SUCCESS) {
-    LOG(ERROR) << "Signature verification failed";
-    LOG(ERROR) << "error: " << kZipVerificationFailure;
-    return false;
+    LOG(WARNING) << "Signature verification failed";
+    return true;
   }
   return true;
 }
